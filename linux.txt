@@ -1,0 +1,201 @@
+리눅스 명령어
+
+[1일차]
+
+ls : 파일 목록 보기
+ls -al : 감춰진 파일 , 안감춰진 파일 모두 보기 (명령어 결합. a + l)
+ls -l : 현재 디렉토리의 파일과 디렉토리를 자세히 보여줌 (list)
+*ls -문자 (문자를 파라미터라고 함)
+*파일권한에서 앞에 d가 붙어있으면 디렉토리, 없으면 파일
+ls -a : 모든 파일 보기
+*파일 or 디렉토리 앞에 .이 붙어있으면 감춰진 파일이어서 ls -a , ls --all 에서만 감춰진 파일이 보임
+ls -S : 큰 사이즈 파일부터 정렬
+
+pwd : 현재 디렉토리 보기
+mkdir 이름 : 디렉토리 만들기
+touch 파일이름 : 비어있는 파일 생성
+
+cd : change directory
+*tab 키를 누르면 자동으로 나머지 이름 보여줌
+cd / : 최상위 디렉토리부터 가고자 하는 디렉토리로 이동 (절대경로)
+cd .. : ..의 의미는 현재 디렉토리의 부모 디렉토리로 이동 (상대경로)
+*/ : 루트 디렉토리 (모든 디렉토리의 최상위)
+
+clear : 화면 초기화
+
+rm : 파일 삭제 
+*어떤 명령이 성공하면 아무 메시지도 뜨지 않음
+rm -r : 디렉토리 하에 모든 파일, 디렉토리 삭제 (recursive하게 /재귀적이게)
+rm --help : rm 명령어 사용방법 도움말
+*명령어 --help : 명령어에 대한 도움말
+man 명령어 : 명령어에 대한 도움말
+*help 와 man 의 차이 : help는 화면 내에서 간단한 매뉴얼 출력 / man 은 전용페이지로 이동하여 상세매뉴얼을 출력
+*man 페이지에서 / 하고 명령어 입력하면 단어 검색해줌 (like ctrl+f, 스킵은 n)
+*리눅스에서 명령어는 프로그램임. 내장되어있는 프로그램이기 때문에 명령어처럼 쓰는 것
+rm -rf / : 루트 디렉토리에 있는 모든 파일과 디렉토리를 삭제해라
+
+mkdir -p : 여러개의 디렉토리 생성 (p: parent /부모디렉토리, 자식디렉토리 생성)
+*명령어 - : 축약형 , 명령어 -- : full name
+
+cp 파일명 복사할경로 : 파일 카피 
+mv 파일명 이동할경로 : 파일 이동
+mv 원파일명 바꿀파일명 : 파일이름변경
+
+sudo : 어떤 프로그램을 설치할때 슈퍼유저의 권한이 필요할 때가 있음 그때 다른 명령어와 함께 사용 (super user do /슈퍼 유저가 하는 일 = super user = root user)
+
+nano : 파일편집기 들어가는 명령어
+*^ 첨자기호는 컨트롤  (클라우드9에서는 실행이 잘 안 됨)
+
+apt : 패키지 매니져 명령법 (sudo 와 함께 자주 사용)
+apt-cache search 프로그램명 : 프로그램에 대한 정보를 검색
+apt-get install 프로그램명 : 프로그램 설치 
+apt-get upgrade 프로그램명 : 프로그램 업그레이드
+apt-get remove 프로그램명 : 프로그램 제거
+apt-get update 프로그램명 : 설치할수 있는 프로그램의 목록을 최신상태로 업데이트
+
+wget : url을 통해 파일을 다운받을 수 있음
+
+[2일차]
+
+react // facebook 에서 배포하는 오픈소스 웹
+
+git : git 관련 명령어
+git clone 주소 디렉토리명 : 주소에 대한 오픈소스 프로젝트를 디렉토리에 복사 (파일, 버전에 관한 변화 등 모두 복제)
+
+"GUI는 순차적으로 진행하는 일을 자동화하기 힘들다 vs CLI는 가능하다" - power of CLI (Why using CLI?)
+; 을 통해 한 줄에 여러개의 명령이 가능하다 (ex. mkdir why;cd why)
+
+grep 찾고자하는단어 찾을문서 : 어떠한 정보에서 내가 필요한 행을 찾는 명령어
+ex. ls --help | grep sort : ls --help 문서에 있는 sort 가 들어간 행을 찾아줌 (여러개의 명령도 가능 // ls --help | grep sort | grep file : sort와 file 이 들어간 행을 찾아줌)
+
+cat : nano 편집기에서 작성한 문서를 화면에 출력해줌
+
+ps aux : 내 컴퓨터에서 실행되는 프로그램 출력
+
+[IO Redirection (input / output 방향을 바꾼다) (기호: > , 의미: redirection)]
+IO stream (input과 output의 흐름을 이렇게도 일컬음)
+
+저장하고 싶은것 > 저장할 문서 : ex. ls -l > result.txt : ls -l의 결과를 result.txt에 저장
+저장하고 싶은것 >> 저장할 문서 : 저장하고 싶은 것이 저장할 문서에 append 됨 (추가)
+ 
+- cmd에 뜨는 output이 standard output 이고, 특정한 문서나 파일에 저장할 경우는 redirection output 이다.
+1> : standard output 에 대한 출력
+2> : standard error 에 대한 출력
+ex. rm mv.txt 1> result.txt 2> error.log 를 하면 'rm mv.txt'를 실행했을 때 result.txt, 즉 정상적인 파일로 저장이 되거나 에러가 나서 에러 메시지가 error.log에 저장이 될수있음
+- cat 을 입력하고 엔터치면 (standard input // 사용자가 키보드로 입력하는 것을 s.i 으로 받고 있음) 사용자가 입력할 수 있는데, 그러면 바로 그 텍스트를 출력해준다. (standard output) 빠져나오고 싶을땐 ctrl+d
+cat < hello.txt(standard input으로 사용) vs cat hello.txt (hello.txt를 인자로 사용) (별로 실용적이지 않음)
+
+head : 10줄만 출력
+head -n1 파일이름 : -n1 일때 command line arguments 이고 , head -n1 < 파일이름: 이면 standard input으로 받은 것
+head -n1 < linux.txt > one.txt : linux.txt의 head 결과를 one.txt에 저장
+
+mail : mail 관련 명령어 (따로 설치해야됨)
+
+명령어 /dev/null : unix 계열에서 쓰레기통과 같음. 실행결과를 화면에도, 파일에도 출력하고 싶지 않을 때 사용
+
+shell vs kernel
+hardware : 컴퓨터의 기계적인 부분
+kernel : hardware를 직접적으로 제어하는 core
+shell : 입력한 명령어를 kernel 이 이해할 수 있는 방식으로 해석해서 kernel 에 전달 (여러가지 shell을 선택해서 사용할 수 있음)
+
+echo 문자 : 문자 출력
+echo $0 : 사용하고 있는 shell 을 출력 (기본적으로 bash 가 탑재)
+
+shell script : 실행하고자 하는 명령을 nano 편집기로 작성해 놓고 사용할 수 있음 (if 문 등등)
+backup program : #! 표시는 해당 디렉토리로 해석해야 한다 (ex. #!/bin/bash)
+
+chmod +x backup : change mode +x backup 이라는 파일의 권한에 x를 추가하라 (실행가능하게 만들어줌)
+
+[3일차]
+
+*directories
+/bin : user binaries 사용자들의 명령어를 모아놓음
+/sbin : system binaries 시스템 관리자 관련 디렉토리
+/etc : configration files 설정 관련 디렉토리 
+/var : variable files 용량, 파일 등이 바뀔 수 있는 것을 모아놓은 디렉토리 
+/tmp : temporary files 임시 파일이 저장되는 곳 (컴퓨터를 reboot하면 파일이 없어짐)
+/home : home directory 에 가고 싶을 때 => cd ~ 
+/usr : user programs 기본적으로 설치되는 파일들은 이 디렉토리 밑에 설치 (bin, sbin 은 컴퓨터를 reboot 할때 필요한 명령어 저장, /usr/bin , /usr/sbin 은 컴퓨터 reboot할 때 필요없는 명령어 저장) 
+
+ps : process
+ps aux : 지금 실행되고 있는 전체 프로그램 을 보여줘
+sudo kill PID : 해당 PID를 종료 (kill)
+sudo top : process 의 리스트 
+
+locate 파일명 : 파일명을 찾아줌 (디렉토리를 뒤지지 않고 mlocate DB를 뒤짐)
+find / : root 디렉토리에서 찾음
+find . : 현재 디렉토리에서부터 하위 디렉토리로 찾음
+ex)find ~ -name *.log : log 확장자를 가진 모든 파일을 현재 디렉토리에서 찾아라 
+-exec : excute 실행시켜라
+
+whereis 파일명 : 이 파일이 어디에 있는지 궁금할 때 사용
+$PATH : 환경변수의 일종. 실행파일을 찾는 경로를 보여줌
+
+fg : foreground
+jobs : + 1등 - 2등  3등 순으로 background 실행된다는 뜻
+kill %숫자 : 일반적인 종료
+kill -9 %숫자 : 강제 종료
+
+ls -R : 모든 디렉토리의 파일을 보여줌
+
+daemon : 항상 실행되고 있다는 특성을 가짐 like web server
+*/etc/init.d/ <- daemon 프로그램이 위치하는 디렉토리
+sudo service apache2 start/stop : apache2 를 키고 끌 때 사용
+
+CRON 
+crontab -e : 매주 언제 실행되어야 할 명령이 있을 때 사용
+crontab -l : edit 한 crontab의 내용이 출력됨
+
+alias l='ls -l' : 별명 붙여주는 것 (ls-l을 실행할 때 l을 누르면 됨)
+
+[4일차]
+
+internet 
+
+ping google.com : google.com 의 ip 주소를 알아낼 수 있음
+ip addr : 내 컴퓨터의 ip 주소를 알 수 있는 명령어 (inet 다음을 봐야함)
+*인터넷 주소창에 ipinfo.io/ip 를 치면 나의 웹브라우저 ip 를 알려줌
+curl google.com : google.com 의 html 코드를 가져옴
+curl ipinfo.io : 내컴퓨터의 ip를 가져옴
+*ip addr과 curl 의 ip 주소가 다를 수 있음. (본인의 내장용 ip 주소와 접속용 ip 주소가 다른 경우 // curl 은 router의 주소를 알 수 있음 vs ip addr 은 해당 컴퓨터의 실질적인 private ip 를 알 수 있음)
+
+web server
+
+sudo apt-cache search 프로그램명 : 해당 프로그램명을 가진 프로그램들을 찾아줌
+sudo apt-get upgrade : 설치된 프로그램의 목록이 업데이트됨
+sudo service 프로그램 : 프로그램 키기
+
+elinks : linux 환경에서 wb로 갈 수 있게 해주는 툴
+elinks 주소 : 해당 주소로 가기
+
+document root : 해당 html 파일의 최상위 root
+
+SSH
+
+sudo apt-get purge 프로그램명 : purge를 이용하면 remove보다 더 강력한 삭제 (환경까지 다 삭제됨)
+
+port (0~1024 까지는 well-known port 라고 함 / 1025~6xxxx 까지는 사용자 free use 가능)
+
+web : 80 이라는 숫자를 port 로 사용
+ssh : 22 라는 숫자를 port 로 사용
+
+port forwarding : 사설ip 주소로 외부의 사용자가 접속할 수 있도록 하는 방법
+만약 라우터에 접근할 경우, 라우터 내에서 외부 사용자가 접속한 해당 port 번호에 사설 ip의 port로 이동하라고 설정해주면 됨
+default gateway : 사설 ip를 관리하는 라우터 내의 ip 주소(?)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
